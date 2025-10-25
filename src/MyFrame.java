@@ -8,12 +8,15 @@ public class MyFrame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocation(200,200);
         this.setSize(500,500);
+        this.setResizable(false);
         Container c=this.getContentPane(); //컨텐트팬 영역의 객체 알기
         c.setBackground(Color.ORANGE );
-        c.setLayout(new FlowLayout());  //배치 관리자 붙여주기
+        c.setLayout(new FlowLayout(FlowLayout.RIGHT,50,200));  //배치 관리자 붙여주기
         c.add(new JButton("OK"));
         c.add(new JButton("Cancel"));
         c.add(new JButton("Ignore"));
+        c.add(new JButton("hello"));
+        c.add(new JButton("exit"));
         c.add(new JLabel("안녕 하세요"));
 
         this.setVisible(true);  //화면에 그리라는 지시
