@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GridBlock extends JFrame {
     public GridBlock(){
@@ -39,6 +41,22 @@ public class GridBlock extends JFrame {
                     labels[i][j]=new JLabel("");
                     labels[i][j].setBackground(Color.WHITE);
                     labels[i][j].setOpaque(true);
+                    labels[i][j].addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e){
+                            JLabel la=(JLabel)e.getSource();
+                            labels[curRow][curCol].setBackground(Color.WHITE);
+                            for(int i=0;i<labels.length;i++){
+                                for(int j=0;j<labels[i].length;j++){
+                                    if(la==labels[i][j]){
+                                        curRow=i;
+                                        curCol=j;
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    });
                     add(labels[i][j]);
 
                 }
@@ -83,6 +101,8 @@ public class GridBlock extends JFrame {
                 c.repaint();
             }
         }
+
+
     }
 
 
