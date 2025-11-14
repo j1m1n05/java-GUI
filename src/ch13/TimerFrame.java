@@ -56,6 +56,10 @@ public class TimerFrame extends JFrame {
                 try{
                     Thread.sleep(delay);
                 }catch (InterruptedException e){
+                    //label 없애기. 컨텐트팬에서 떼어내기
+                    Container c=label.getParent();
+                    c.remove(label);  //컨테이너에서 컴포넌트 떼어내기
+                    c.repaint();  //컨테이너에게 다시 그릴것을 지시
                     return;  //스레드 종료
                 }
 
@@ -64,5 +68,8 @@ public class TimerFrame extends JFrame {
     }
     public static void main(String[] args) {
         new TimerFrame();
+        long id=Thread.currentThread().getId();
+        String name=Thread.currentThread().getName();
+        System.out.println(id+":"+name);
     }
 }
