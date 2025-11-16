@@ -13,6 +13,11 @@ public class TimerFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container c= getContentPane();
         c.setLayout(new FlowLayout());
+
+        long id=Thread.currentThread().getId();
+        String name=Thread.currentThread().getName();
+        System.out.println("프레임 생성자"+id+":"+name);
+        
         JLabel timerLabel=new JLabel("0");
         timerLabel.setFont(new Font("Gothic",Font.ITALIC,40));
         timerLabel.setForeground(Color.BLUE);
@@ -23,6 +28,7 @@ public class TimerFrame extends JFrame {
         JLabel timerLabel2=new JLabel("0");
         timerLabel2.setFont(new Font("Gothic",Font.ITALIC,40));
         c.add(timerLabel2);
+        timerLabel2.setForeground(Color.MAGENTA);
         th2=new TimerThread(timerLabel2,100);  //스레드 생성
         th2.start();
 
@@ -35,6 +41,10 @@ public class TimerFrame extends JFrame {
                                  //중단 명령
                 JButton b=(JButton)e.getSource();
                 b.setEnabled(false);
+
+                long id=Thread.currentThread().getId();
+                String name=Thread.currentThread().getName();
+                System.out.println("actionPerformed"+id+":"+name);
             }
         });
         setSize(300,300);
@@ -47,8 +57,15 @@ public class TimerFrame extends JFrame {
         public TimerThread(JLabel label, int delay){
             this.label=label;
             this.delay=delay;
+
+            long id=Thread.currentThread().getId();
+            String name=Thread.currentThread().getName();
+            System.out.println("스레드 생성자"+id+":"+name);
         }
         public void run(){  //스레드 코드. 이 주소에서 실행을 시작하도록 TCB에 기록
+            long id=Thread.currentThread().getId();
+            String name=Thread.currentThread().getName();
+            System.out.println("run()"+id+":"+name);
             int n=1;
             while(true){
                 label.setText(Integer.toString(n));
@@ -68,8 +85,6 @@ public class TimerFrame extends JFrame {
     }
     public static void main(String[] args) {
         new TimerFrame();
-        long id=Thread.currentThread().getId();
-        String name=Thread.currentThread().getName();
-        System.out.println(id+":"+name);
+
     }
 }
